@@ -1,7 +1,12 @@
+
+
 import os
 
 os.system("sudo pip3 install torch")
 os.system("sudo pip3 install torchvision")
+
+
+
 
 
 import torch
@@ -14,9 +19,11 @@ num_epochs = 25
 batch_size = 50
 learning_rate = 0.01
 from torch.utils.data import DataLoader
+
 device = torch.device('cpu')
 
 def read_data():
+
     transform = transforms.Compose([
         transforms.Pad(4),
         transforms.RandomHorizontalFlip(),
@@ -28,10 +35,10 @@ def read_data():
     data_loader_val = DataLoader(dataset=dataset_val, batch_size=batch_size, shuffle=False)
     return dataset_train, dataset_val, data_loader_train, data_loader_val
 
+
 def conv3x3(in_channels, out_channels, stride=1):
     return nn.Conv2d(in_channels, out_channels, kernel_size=3,
                      stride=stride, padding=1, bias=False)
-
 
 class ResidualBlock(nn.Module):
         def __init__(self, in_channels, out_channels, stride=1, downsample=None):
@@ -57,6 +64,7 @@ class ResidualBlock(nn.Module):
             return out
 
 class NeuralNetwork(nn.Module):
+    # ResNet定义
     def __init__(self, block, layers, num_classes=10):
         super(NeuralNetwork, self).__init__()
         self.in_channels = 16
@@ -97,7 +105,7 @@ class NeuralNetwork(nn.Module):
 model = NeuralNetwork(ResidualBlock, [2, 2, 2]).to(device)
 
 def main():
-    model = NeuralNetwork(ResidualBlock, [2, 2, 2]).to(device)
+    model = NeuralNetwork(ResidualBlock, [2, 2, 2]).to(device) # 若有参数则传入参数
     current_dir = os.path.dirname(os.path.abspath(__file__))
     parent_dir = os.path.dirname(current_dir)
     model.load_state_dict(torch.load(parent_dir + '/pth/model.pth'))
