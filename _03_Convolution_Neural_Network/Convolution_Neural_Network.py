@@ -1,12 +1,7 @@
-
-
 import os
 
 os.system("sudo pip3 install torch")
 os.system("sudo pip3 install torchvision")
-
-
-
 
 
 import torch
@@ -19,7 +14,6 @@ num_epochs = 25
 batch_size = 50
 learning_rate = 0.01
 from torch.utils.data import DataLoader
-#device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 device = torch.device('cpu')
 
 def read_data():
@@ -104,7 +98,7 @@ model = NeuralNetwork(ResidualBlock, [2, 2, 2]).to(device)
 
 
 def main():
-    model = NeuralNetwork(ResidualBlock, [2, 2, 2]).to(device) # 若有参数则传入参数
+    model = NeuralNetwork(ResidualBlock, [2, 2, 2]).to(device)
     current_dir = os.path.dirname(os.path.abspath(__file__))
     parent_dir = os.path.dirname(current_dir)
     model.load_state_dict(torch.load(parent_dir + '/pth/model.pth'))
