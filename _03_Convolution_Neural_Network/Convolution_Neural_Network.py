@@ -96,7 +96,6 @@ class NeuralNetwork(nn.Module):
 
 model = NeuralNetwork(ResidualBlock, [2, 2, 2]).to(device)
 
-
 def main():
     model = NeuralNetwork(ResidualBlock, [2, 2, 2]).to(device)
     current_dir = os.path.dirname(os.path.abspath(__file__))
